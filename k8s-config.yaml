@@ -19,6 +19,7 @@ spec:
         image: cuu2252/k8s-node-app:latest
         ports:
         - containerPort: 3000
+        imagePullPolicy: Always
         
         
 ---
