@@ -57,17 +57,3 @@ spec:
             name: k8s-node-app-service
             port:
               number: 5000
-      - path: /hello
-        pathType: Prefix
-        backend:
-          service:
-            name: k8s-node-app-service
-            port:
-              number: 31234
-      - path: /ready
-        pathType: Prefix
-        backend:
-          service:
-            name: k8s-node-app-service
-            port:
-              number: 3000
