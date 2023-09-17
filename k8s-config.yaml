@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-node-app-deployment
+  labels:
+    app: k8s-node-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-node-app
+  template:
+    metadata:
+      labels:
+        app: k8s-node-app 
+    spec:
+      containers:
+      - name: node-server
+        image: cuu2252/k8s-node-app:latest
+        ports:
+        - containerPort: 3000
+        
+        
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-node-app-service
+spec:
+  selector:
+    app: k8s-node-app 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 3000
+    nodePort: 31234
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /home(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: k8s-node-app-service
+            port:
+              number: 5000
+      - path: /hello
+        pathType: Prefix
+        backend:
+          service:
+            name: k8s-node-app-service
+            port:
+              number: 31234
+      - path: /ready
+        pathType: Prefix
+        backend:
+          service:
+            name: k8s-node-app-service
+            port:
+              number: 3000
