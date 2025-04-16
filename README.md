@@ -1,8 +1,4 @@
-Sure! Here's a professional and clean `README.md` for your Kubernetes repo at [https://github.com/saebyeokchu/k8s](https://github.com/saebyeokchu/k8s), assuming it's for managing Kubernetes manifests and deployments.
 
----
-
-```markdown
 # k8s 🐳🛠️
 
 A personal Kubernetes configuration repository for deploying and managing containerized applications using declarative manifests and Helm charts. This repo reflects my DevOps learning journey, best practices, and experimentation in real-world deployments.
@@ -19,12 +15,8 @@ A personal Kubernetes configuration repository for deploying and managing contai
 
 ```bash
 k8s/
-├── base/               # Common manifests shared across environments
-├── overlays/           # Environment-specific configurations (dev/stage/prod)
-│   ├── dev/
-│   ├── stage/
-│   └── prod/
-├── charts/             # Custom or third-party Helm charts
+├── base/             # Common manifests shared across environments
+├── docker/           # Running simple application for test
 └── README.md
 ```
 
